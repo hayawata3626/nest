@@ -119,6 +119,16 @@ describe('Global prefix', () => {
     await request(server).get('/api/v1/middleware/foo').expect(404);
   });
 
+  it(`should get a prefix through middleware`, async () => {
+    const prefix = ':prefix';
+    app.setGlobalPrefix(prefix);
+
+    server = app.getHttpServer();
+    await app.init();
+
+    await request(server).get(`/${prefix}/route-prefix`).expect(200, prefix);
+  });
+
   afterEach(async () => {
     await app.close();
   });

@@ -19,6 +19,7 @@ export class AppModule {
       .apply((req, res, next) => res.status(201).end(MIDDLEWARE_PARAM_VALUE))
       .forRoutes({ path: MIDDLEWARE_VALUE + '/*', method: RequestMethod.POST })
       .apply((req, res, next) => {
+        console.log(req.params, 'params');
         req.extras = { data: 'Data attached in middleware' };
         next();
       })

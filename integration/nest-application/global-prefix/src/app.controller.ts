@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Req } from '@nestjs/common';
+import { Param } from '../../../../packages/common';
 
 @Controller()
 export class AppController {
@@ -20,5 +21,11 @@ export class AppController {
   @Post('test')
   postTest(): string {
     return 'test';
+  }
+
+  @Get('route-prefix')
+  getTest2(@Param('prefix') prefix: string): string {
+    console.log(prefix, 'prefix in controller');
+    return prefix;
   }
 }
